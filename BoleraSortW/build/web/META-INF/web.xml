@@ -1,0 +1,9 @@
+<servlet>
+    <servlet-name>ReservaServlet</servlet-name>
+    <servlet-class>com.bolera.reservas.servlets.ReservaServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ReservaServlet</servlet-name>
+    <url-pattern>/reserva</url-pattern>
+</servlet-mapping>
