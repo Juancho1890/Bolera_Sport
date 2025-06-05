@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="urn:LoginService"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="urn:LoginService">
+
+  <types>
+    <xsd:schema targetNamespace="urn:LoginService">
+      <xsd:element name="loginRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="LoginInput">
+    <part name="parameters" element="tns:loginRequest"/>
+  </message>
+  <message name="LoginOutput">
+    <part name="parameters" element="tns:loginResponse"/>
+  </message>
+
+  <portType name="LoginPortType">
+    <operation name="login">
+      <input message="tns:LoginInput"/>
+      <output message="tns:LoginOutput"/>
+    </operation>
+  </portType>
+
+  <binding name="LoginBinding" type="tns:LoginPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="login">
+      <soap:operation soapAction="login"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="LoginService">
+    <port name="LoginPort" binding="tns:LoginBinding">
+      <soap:address location="http://localhost/soap_login/server.php"/>
+    </port>
+  </service>
+</definitions>
